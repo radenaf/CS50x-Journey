@@ -1,12 +1,12 @@
 def needleman_wunsch(seq1, seq2, match_reward=1, mismatch_penalty=-1, gap_penalty=-1):
-    # 1. Setup the Grid
+    # 1. Matrix Grid Setup
     rows, cols = len(seq1) + 1, len(seq2) + 1
     matrix = [[0 for _ in range(cols)] for _ in range(rows)]
     
     for i in range(rows): matrix[i][0] = i * gap_penalty
     for j in range(cols): matrix[0][j] = j * gap_penalty
         
-    # 2. Fill the Matrix 
+    # 2. Fill in the Matrix 
     for i in range(1, rows):
         for j in range(1, cols):
             is_match = seq1[i-1] == seq2[j-1]
@@ -84,11 +84,10 @@ print(aligned_B)
 # Print the metadata summary report matching the image format
 print("\nAlignment type: DNA alignment")
 print("\nMatrix: SIMPLE_SCORING")
-print("Gap penalty: 1.0")
+print("Gap penalty: -1.0")
 print(f"Score: {float(score):.1f}")
 print(f"Sequence 1 length: {len(sequence_A)}")
 print(f"Sequence 2 length: {len(sequence_B)}")
 print(f"Alignment length:  {align_len}")
 print(f"Identity:         {identities}/{align_len} ({id_pct:.2f}%)")
-print(f"Similarity:       {identities}/{align_len} ({id_pct:.2f}%)")
 print(f"Gaps:             {gaps}/{align_len} ({gap_pct:.2f}%)")
