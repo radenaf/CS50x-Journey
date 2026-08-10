@@ -1,0 +1,21 @@
+10 HTML tags used (excluding html, head, body, title):
+1. meta
+2. link
+3. script
+4. nav
+5. main
+6. section
+7. a
+8. ul
+9. form
+10. footer
+
+5 CSS properties used:
+1. background
+2. margin
+3. padding
+4. color
+5. box-shadow
+
+JavaScript and Bootstrap usage:
+JavaScript is used to handle a quote button and contact-form feedback, while Bootstrap is used for responsive layout, navbar behavior, grid, cards, and form styling.

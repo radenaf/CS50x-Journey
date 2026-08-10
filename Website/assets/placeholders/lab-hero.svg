@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Laboratory visual placeholder</title>
+  <desc id="desc">Placeholder illustration for official laboratory imagery.</desc>
+  <rect width="1200" height="800" fill="#eef4f5"/>
+  <rect x="60" y="60" width="1080" height="680" rx="36" fill="#ffffff" stroke="#c9d5d9" stroke-width="6"/>
+  <rect x="120" y="130" width="320" height="500" rx="24" fill="#13364a"/>
+  <rect x="490" y="130" width="590" height="150" rx="24" fill="#edf3f4" stroke="#c9d5d9" stroke-width="4"/>
+  <rect x="490" y="320" width="270" height="310" rx="24" fill="#edf3f4" stroke="#c9d5d9" stroke-width="4"/>
+  <rect x="810" y="320" width="270" height="310" rx="24" fill="#edf3f4" stroke="#c9d5d9" stroke-width="4"/>
+  <circle cx="280" cy="280" r="88" fill="#25656a" opacity="0.28"/>
+  <circle cx="280" cy="280" r="54" fill="#ffffff" opacity="0.9"/>
+  <path d="M252 248h56m-28 0v84m-42 0h84" stroke="#ffffff" stroke-width="18" stroke-linecap="round"/>
+  <path d="M220 470c26-50 62-76 108-76 46 0 82 26 108 76" fill="none" stroke="#ffffff" stroke-width="18" stroke-linecap="round"/>
+  <rect x="540" y="178" width="352" height="22" rx="11" fill="#13364a" opacity="0.88"/>
+  <rect x="540" y="222" width="268" height="16" rx="8" fill="#5a6d74" opacity="0.72"/>
+  <rect x="540" y="410" width="168" height="18" rx="9" fill="#13364a" opacity="0.85"/>
+  <rect x="540" y="448" width="182" height="14" rx="7" fill="#5a6d74" opacity="0.7"/>
+  <rect x="860" y="410" width="168" height="18" rx="9" fill="#13364a" opacity="0.85"/>
+  <rect x="860" y="448" width="182" height="14" rx="7" fill="#5a6d74" opacity="0.7"/>
+  <text x="600" y="710" text-anchor="middle" font-family="IBM Plex Sans, Arial, sans-serif" font-size="28" fill="#5a6d74">[OFFICIAL LABORATORY IMAGE WILL BE ADDED]</text>
+</svg>

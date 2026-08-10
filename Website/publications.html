@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Publications | Rickettsial Laboratory</title>
+        <meta name="description" content="Scientific publications page placeholder for the Rickettsial Laboratory with keyword search, year filter, research-area filter, pathogen filter, and newest or oldest sorting.">
+        <meta property="og:title" content="Publications | Rickettsial Laboratory">
+        <meta property="og:description" content="Data-driven publication interface for official scientific outputs and filtering.">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="assets/placeholders/news-feature.svg">
+        <link rel="canonical" href="publications.html">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link href="styles/main.css" rel="stylesheet">
+    </head>
+    <body data-page="publications.html">
+        <a class="skip-link" href="#main-content">Skip to main content</a>
+        <div data-site-header></div>
+
+        <main id="main-content">
+            <header class="page-header">
+                <div class="container">
+                    <div data-breadcrumbs='[{"label":"Home","href":"index.html"},{"label":"Publications"}]'></div>
+                    <div class="page-header-shell">
+                        <div class="page-header-panel hero-panel">
+                            <p class="page-kicker">Publications</p>
+                            <h1>Scientific publication records</h1>
+                            <p>This page is built around structured placeholder data so future official publication lists can be maintained without redesigning the interface.</p>
+                        </div>
+                        <aside class="page-aside">
+                            <div class="info-panel">
+                                <p class="card-eyebrow">Filterable Archive</p>
+                                <h3>Search and sorting controls</h3>
+                                <p>Keyword search, year, research area, pathogen, and sort order are active now using placeholder records.</p>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </header>
+
+            <section class="surface-section">
+                <div class="container filter-layout">
+                    <aside class="filter-panel">
+                        <div class="section-heading">
+                            <p class="section-eyebrow">Filter Controls</p>
+                            <h2>Find publications</h2>
+                        </div>
+                        <div class="filter-group">
+                            <div>
+                                <label for="publication-search">Keyword Search</label>
+                                <input id="publication-search" type="search" placeholder="Search title, authors, or abstract">
+                            </div>
+                            <div>
+                                <label for="publication-year">Year</label>
+                                <select id="publication-year"></select>
+                            </div>
+                            <div>
+                                <label for="publication-area">Research Area</label>
+                                <select id="publication-area"></select>
+                            </div>
+                            <div>
+                                <label for="publication-pathogen">Pathogen</label>
+                                <select id="publication-pathogen"></select>
+                            </div>
+                            <div>
+                                <label for="publication-sort">Sort</label>
+                                <select id="publication-sort">
+                                    <option value="newest">Newest</option>
+                                    <option value="oldest">Oldest</option>
+                                </select>
+                            </div>
+                        </div>
+                    </aside>
+                    <div id="publication-results" class="news-grid" aria-live="polite"></div>
+                </div>
+            </section>
+        </main>
+
+        <div data-site-footer></div>
+
+        <script src="content/site-data.js"></script>
+        <script src="components/site-components.js"></script>
+        <script src="scripts/main.js"></script>
+    </body>
+</html>
