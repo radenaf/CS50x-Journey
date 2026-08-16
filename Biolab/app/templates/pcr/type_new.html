@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}New PCR Type{% endblock %}
+{% block content %}
+<div class="mb-4"><a class="small text-success text-decoration-none" href="{{ url_for('pcr.templates') }}">← PCR Type library</a><div class="eyebrow text-success mt-4 mb-2">PCR Assistant / Reusable protocol</div><h1 class="h2 mb-1">Create a new PCR Type</h1><p class="text-muted">Save the protocol once, then use it for as many experiments as needed.</p></div>
+<form method="post">
+<div class="panel mb-4"><div class="section-heading mt-0"><h2>Basic information</h2></div><div class="row g-3"><div class="col-md-6"><label class="form-label" for="name">PCR Type name</label><input class="form-control" id="name" name="name" required placeholder="e.g. Rickettsia r17 qPCR"></div><div class="col-md-3"><label class="form-label" for="category">PCR category</label><select class="form-select" id="category" name="category"><option>Conventional PCR</option><option>Nested PCR</option><option>qPCR</option><option>RT-qPCR</option><option>Other</option></select></div><div class="col-md-3"><label class="form-label" for="reaction_volume_ul">Reaction volume (µL)</label><input class="form-control" id="reaction_volume_ul" name="reaction_volume_ul" type="number" min="0" step="0.01" value="25"></div></div></div>
+<div class="panel mb-4"><div class="section-heading mt-0"><div><h2>Reagent configuration</h2><p class="text-muted small mb-0">Add as many components as this protocol requires. Choose Template for components added individually; all other categories are included in the master mix.</p></div><button class="btn btn-outline-success btn-sm" type="button" id="add-reagent">+ Add reagent</button></div><div class="table-responsive"><table class="table align-middle"><thead><tr><th>Reagent name</th><th>Category</th><th>Volume / reaction (µL)</th><th></th></tr></thead><tbody id="reagent-rows"></tbody></table></div></div>
+<div class="panel mb-4"><div class="section-heading mt-0"><div><h2>PCR program</h2><p class="text-muted small mb-2">Add thermal steps and GOTO repeats in the order the instrument should run them.</p><p class="text-muted small mb-0">Enter time as minutes:seconds, for example <strong>2:55</strong>. Choose GOTO after the last step in a loop. Choose Hold for an infinite hold at that temperature.</p></div><button class="btn btn-outline-success btn-sm" type="button" id="add-step">+ Add step</button></div><div class="table-responsive"><table class="table align-middle"><thead><tr><th>Instruction</th><th>Step</th><th>Temperature (°C)</th><th>Time (minutes:seconds)</th><th></th></tr></thead><tbody id="step-rows"></tbody></table></div></div>
+<div class="d-flex justify-content-end"><button class="btn btn-coral px-4" type="submit">Save PCR Type</button></div>
+</form>
+{% endblock %}
+{% block scripts %}
+<script>
+const reagentCategories = ['Mastermix', 'Primer', 'Probe', 'Water', 'Template', 'Other'];
+const stepOptions = ['Initial Denaturation', 'Denaturation', 'Annealing', 'Extension', 'Final Extension', 'Hold', 'Fluorescence Acquisition', 'Other'];
+function optionMarkup(options) { return options.map(option => `<option>${option}</option>`).join(''); }
+function addReagent() {
+    const row = document.createElement('tr');
+    row.innerHTML = `<td><input class="form-control" name="reagent_name" placeholder="e.g. Forward Primer"></td><td><select class="form-select" name="reagent_category">${optionMarkup(reagentCategories)}</select></td><td><input class="form-control" name="reagent_volume" type="number" min="0" step="0.01" placeholder="e.g. 0.60" required></td><td><button class="btn btn-sm btn-outline-danger remove-row" type="button" aria-label="Remove reagent">Remove</button></td>`;
+    document.getElementById('reagent-rows').appendChild(row);
+}
+function addStep() {
+    const row = document.createElement('tr');
+    row.innerHTML = `<td><select class="form-select" name="step_kind"><option value="step">Thermal step</option><option value="goto">GOTO / repeat</option></select></td><td><select class="form-select" name="step_name">${optionMarkup(stepOptions)}</select><div class="goto-fields d-none mt-2"><label class="form-label small mb-1">Repeat from step</label><input class="form-control" name="step_goto" type="number" min="1" placeholder="e.g. 2"><label class="form-label small mb-1 mt-2">Repeat count</label><input class="form-control" name="step_repeats" type="number" min="1" placeholder="e.g. 39"></div></td><td class="thermal-field"><input class="form-control" name="step_temperature" type="number" step="0.1" placeholder="e.g. 95"></td><td class="thermal-field"><input class="form-control step-time" name="step_time" type="text" inputmode="numeric" pattern="[0-9]+:[0-5][0-9]" placeholder="e.g. 2:55"></td><td><button class="btn btn-sm btn-outline-danger remove-row" type="button" aria-label="Remove step">Remove</button></td>`;
+    const kind = row.querySelector('[name="step_kind"]');
+    const name = row.querySelector('[name="step_name"]');
+    const gotoFields = row.querySelector('.goto-fields');
+    const thermalFields = row.querySelectorAll('.thermal-field');
+    const temperature = row.querySelector('[name="step_temperature"]');
+    const time = row.querySelector('[name="step_time"]');
+    kind.addEventListener('change', () => { const isGoto = kind.value === 'goto'; const isHold = name.value === 'Hold'; name.classList.toggle('d-none', isGoto); gotoFields.classList.toggle('d-none', !isGoto); thermalFields.forEach(field => field.classList.toggle('d-none', isGoto)); temperature.value = isGoto ? '' : temperature.value; time.readOnly = isGoto || isHold; if (isGoto) time.value = ''; else if (isHold) time.value = '∞'; else time.value = ''; });
+    name.addEventListener('change', () => { if (kind.value !== 'goto') { const isHold = name.value === 'Hold'; time.readOnly = isHold; time.value = isHold ? '∞' : ''; } });
+    document.getElementById('step-rows').appendChild(row);
+}
+document.getElementById('add-reagent').addEventListener('click', addReagent);
+document.getElementById('add-step').addEventListener('click', addStep);
+document.addEventListener('click', event => { if (event.target.classList.contains('remove-row')) event.target.closest('tr').remove(); });
+addReagent();
+addStep();
+</script>
+{% endblock %}

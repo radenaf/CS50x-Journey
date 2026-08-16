@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}PCR Assistant{% endblock %}
+{% block content %}
+<div class="eyebrow text-success mb-3">Module 01 / PCR Assistant</div><h1 class="display-title">Design the next run.</h1><p class="lead-copy mb-5">Start with a reusable PCR Type, then add the samples and controls for this experiment.</p>
+<div class="row g-3 mb-5">
+    <div class="col-lg-4"><div class="module-card"><div class="module-icon">＋</div><h3>New experiment</h3><p>Create a draft run and add samples, controls, and protocol details as you work.</p><a class="btn btn-coral btn-sm" href="{{ url_for('pcr.experiments') }}">Start a draft</a></div></div>
+    <div class="col-lg-4"><div class="module-card"><div class="module-icon">▤</div><h3>Experiments <span class="badge rounded-pill badge-ready">{{ experiment_count }}</span></h3><p>Review active runs and keep the handoff to results clear and traceable.</p><a class="btn btn-outline-success btn-sm" href="{{ url_for('pcr.experiments') }}">Browse experiments</a></div></div>
+    <div class="col-lg-4"><div class="module-card"><div class="module-icon">◇</div><h3>PCR Type library <span class="badge rounded-pill badge-ready">{{ template_count }}</span></h3><p>Reusable protocols keep reagents, volumes, and cycling conditions consistent across runs.</p><a class="btn btn-outline-success btn-sm" href="{{ url_for('pcr.templates') }}">View PCR Types</a></div></div>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Raden's BioLab{% endblock %} | Raden's BioLab</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar">
+        <a class="brand" href="{{ url_for('dashboard.dashboard') }}">
+            <span class="brand-mark">B</span>
+            <span>Raden's BioLab</span>
+        </a>
+        <div class="sidebar-label">Workspace</div>
+        <nav class="nav flex-column gap-1">
+            <a class="nav-link {% if request.endpoint == 'dashboard.dashboard' %}active{% endif %}" href="{{ url_for('dashboard.dashboard') }}"><span>⌂</span> Dashboard</a>
+            <a class="nav-link {% if request.endpoint and request.endpoint.startswith('pcr.') %}active{% endif %}" href="{{ url_for('pcr.index') }}"><span>✣</span> PCR Assistant</a>
+            <div class="subnav">
+                <a href="{{ url_for('pcr.new_experiment') }}">New Experiment</a>
+                <a href="{{ url_for('pcr.experiments') }}">Open / Saved Experiments</a>
+                <a href="{{ url_for('pcr.templates') }}">PCR Type Library</a>
+                <a href="{{ url_for('pcr.new_type') }}">PCR Type Builder</a>
+            </div>
+        </nav>
+        <div class="sidebar-label mt-4">Coming soon</div>
+        <nav class="nav flex-column gap-1 muted-nav">
+            <span class="nav-link"><span>◌</span> PCR Results <small>SOON</small></span>
+            <span class="nav-link"><span>⌁</span> Sequence Analyzer <small>SOON</small></span>
+        </nav>
+        <div class="sidebar-footer"><span class="status-dot"></span> Local workspace</div>
+    </aside>
+    <main class="main-content">
+        <header class="topbar"><span class="eyebrow">MODULAR MOLECULAR WORKSPACE</span><span class="topbar-date">Development environment</span></header>
+        <div class="page-wrap">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">{{ message }}<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>{% endfor %}
+                {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>
