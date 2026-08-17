@@ -1,0 +1,15 @@
+
+To characterize the listener's audio aura, I would query the average energy, valence, and danceability:
+Query: SELECT AVG(energy), AVG(valence), AVG(danceability) FROM songs;
+This reveals the overall mood profile of their top 100 songs.
+For example, if energy and valence are high with moderate danceability, the aura might be "Euphoric yet Groovy."
+If valence is low and energy is high, it could represent an "Intense, Angry" mood.
+
+
+Better Approaches:
+Calculate weighted averages using play frequency, so favorite songs have more influence.
+Show the distribution (median, quartiles) rather than just the mean to reveal range and diversity.
+Group songs by mood (e.g., K-means on energy/valence) to identify distinct playlists/moods within the top 100.
+Segment data by month/season to show mood evolution over the year.
+Create discrete mood labels (happy, sad, energetic, calm) using thresholds on multiple features rather than treating them as continuous values.
+Compare the user's audio profile to average listeners to highlight uniqueness.

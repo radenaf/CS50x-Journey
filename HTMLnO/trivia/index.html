@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            function checkMultipleChoice(button) {
+                if (button.textContent === "Kuala Lumpur") {
+                    button.style.backgroundColor = "green";
+                    alert("Correct!");
+                } else {
+                    button.style.backgroundColor = "red";
+                    alert("Incorrect!");
+                }
+            }
+
+            function checkFreeResponse() {
+                const input = document.querySelector("input[type='text']");
+                const answer = input.value.toLowerCase().trim();
+                if (answer === "kelantan") {
+                    input.style.backgroundColor = "lightgreen";
+                    alert("Correct!");
+                } else {
+                    input.style.backgroundColor = "lightcoral";
+                    alert("Incorrect!");
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <!-- TODO: Add multiple choice question here with button on each option -->
+                <p>What is the capital of Malaysia?</p>
+                <ul>
+                    <li><button onclick="checkMultipleChoice(this)">Kuala Lumpur</button></li>
+                    <li><button onclick="checkMultipleChoice(this)">George Town</button></li>
+                    <li><button onclick="checkMultipleChoice(this)">Shah Alam</button></li>
+                    <li><button onclick="checkMultipleChoice(this)">Putrajaya</button></li>
+                </ul>
+                <!-- <button onclick="checkAnswer()">Submit</button> -->
+
+
+
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <!-- TODO: Add free response question here -->
+                <p>Which state in Malaysia eats savory food very sweetly?</p>
+                <input type="text" placeholder="Enter your answer">
+                <button onclick="checkFreeResponse()">Submit</button>
+            </div>
+        </div>
+    </body>
+</html>
