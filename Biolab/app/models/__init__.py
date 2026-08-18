@@ -1,7 +1,6 @@
 from app.models.assay import Assay
 from app.models.control import Control
 from app.models.experiment import PCRExperiment
-from app.models.plate import Plate, PlateWell
 from app.models.pcr_program import PCRCycleGroup, PCRProgram, PCRStep
 from app.models.reagent import Reagent
 from app.models.sample import Sample
@@ -19,6 +18,4 @@ def register_models():
         PCRProgram,
         PCRStep,
         PCRCycleGroup,
-        Plate,
-        PlateWell,
     )

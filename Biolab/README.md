@@ -30,7 +30,7 @@ The development database is SQLite (`biolab.db`). Set `DATABASE_URL` to use anot
 - `.pcr` JSON-backed protocol save, open, duplicate, and template snapshot workflows
 - Assay creation and listing
 - PCR template listing
-- Foundation models for samples, controls, reagents, structured PCR programs, and plates
+- Foundation models for samples, controls, reagents, and structured PCR programs
 - Configurable calculation services for master mix scaling and PCR program duration
 
 PCR Results and Sequence Analyzer are intentionally marked Coming Soon and are not implemented.

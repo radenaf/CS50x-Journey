@@ -38,4 +38,3 @@ class PCRExperiment(db.Model):
     controls = db.relationship("Control", back_populates="experiment")
     reagents = db.relationship("Reagent", back_populates="experiment", cascade="all, delete-orphan")
     programs = db.relationship("PCRProgram", back_populates="experiment", cascade="all, delete-orphan")
-    plates = db.relationship("Plate", back_populates="experiment", cascade="all, delete-orphan")

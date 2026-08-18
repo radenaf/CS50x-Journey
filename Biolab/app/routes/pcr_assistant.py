@@ -13,7 +13,6 @@ from app import db
 from app.models import Assay, Control, PCRExperiment, PCRTemplate, Reagent, Sample
 from app.services.experiment_service import add_cycle_group, add_program_step, delete_program_step, master_mix_reactions, master_mix_totals, move_program_step, total_reactions, update_program_step
 from app.services.pcr_file_service import experiment_from_dict, experiment_json
-from app.services.plate_service import assign_well, ensure_plate
 
 pcr_bp = Blueprint("pcr", __name__)
 
@@ -321,6 +320,26 @@ def add_control(experiment_id):
     return redirect(url_for("pcr.edit_experiment", experiment_id=record.id) + "#control-id-name")
 
 
+@pcr_bp.post("/experiments/<int:experiment_id>/samples/<int:sample_id>/delete")
+def delete_sample(experiment_id, sample_id):
+    record = db.get_or_404(PCRExperiment, experiment_id)
+    sample = next((item for item in record.samples if item.id == sample_id), None)
+    if sample:
+        db.session.delete(sample)
+        db.session.commit()
+    return redirect(url_for("pcr.edit_experiment", experiment_id=record.id) + "#sample-id-name")
+
+
+@pcr_bp.post("/experiments/<int:experiment_id>/controls/<int:control_id>/delete")
+def delete_control(experiment_id, control_id):
+    record = db.get_or_404(PCRExperiment, experiment_id)
+    control = next((item for item in record.controls if item.id == control_id), None)
+    if control:
+        db.session.delete(control)
+        db.session.commit()
+    return redirect(url_for("pcr.edit_experiment", experiment_id=record.id) + "#control-id-name")
+
+
 @pcr_bp.post("/experiments/<int:experiment_id>/results/<string:record_type>/<int:record_id>")
 def update_result(experiment_id, record_type, record_id):
     experiment = db.get_or_404(PCRExperiment, experiment_id)
@@ -409,15 +428,6 @@ def add_group(experiment_id):
     add_cycle_group(record, request.form)
     db.session.commit()
     return redirect(url_for("pcr.experiment", experiment_id=record.id) + "#program")
-
-
-@pcr_bp.post("/experiments/<int:experiment_id>/plate")
-def update_plate(experiment_id):
-    record = db.get_or_404(PCRExperiment, experiment_id)
-    plate = ensure_plate(record)
-    assign_well(plate, request.form.get("position"), request.form.get("sample_id"), request.form.get("control_id"), record.target, request.form.get("replicate_number"))
-    db.session.commit()
-    return redirect(url_for("pcr.experiment", experiment_id=record.id) + "#plate")
 
 
 @pcr_bp.get("/experiments/<int:experiment_id>/save")

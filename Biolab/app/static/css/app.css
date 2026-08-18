@@ -85,10 +85,6 @@ h1, h2, h3, h4, .brand { font-family: 'Space Grotesk', sans-serif; }
 .form-control:focus { border-color: var(--teal); box-shadow: 0 0 0 .2rem rgba(11,129,120,.12); }
 .list-row { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid var(--line); font-size: .87rem; }
 .reaction-number { font: 700 2.6rem 'Space Grotesk', sans-serif; color: var(--teal-dark); }
-.plate-grid { display: grid; grid-template-columns: repeat(12, minmax(28px, 1fr)); gap: 4px; }
-.plate-well { min-width: 0; aspect-ratio: 1; border: 1px solid var(--line); border-radius: 4px; background: #f5f8f7; color: var(--muted); font-size: .55rem; padding: 2px; overflow: hidden; }
-.plate-well.filled { background: #d8f2e7; border-color: #86c8ae; color: #176b50; }
-.plate-well small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .46rem; }
 .editor-header { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 28px; }
 .editor-actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
 .program-list { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }

@@ -35,8 +35,6 @@ def ensure_development_schema():
         "pcr_program": {"experiment_id": "INTEGER"},
         "pcr_cycle_group": {"program_id": "INTEGER"},
         "pcr_step": {"name": "VARCHAR(160) NOT NULL DEFAULT 'Step'", "step_type": "VARCHAR(40) NOT NULL DEFAULT 'step'", "goto_step": "INTEGER", "repeat_count": "INTEGER NOT NULL DEFAULT 0", "cycle_group_id": "INTEGER"},
-        "plate": {"experiment_id": "INTEGER"},
-        "plate_well": {"target": "VARCHAR(160)", "sample_id": "INTEGER", "control_id": "INTEGER"},
     }
 
     with db.engine.begin() as connection:

@@ -12,4 +12,3 @@ class Sample(db.Model):
     experiment_id = db.Column(db.Integer, db.ForeignKey("pcr_experiment.id"), nullable=False)
 
     experiment = db.relationship("PCRExperiment", back_populates="samples")
-    wells = db.relationship("PlateWell", back_populates="sample")

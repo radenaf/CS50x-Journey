@@ -152,6 +152,30 @@ def test_add_sample_and_control_ids(client, app):
         assert experiment.controls[0].experiment_id == experiment_id
 
 
+def test_delete_sample_and_control_ids(client, app):
+    response = client.post("/pcr/experiments", data={"name": "Remove IDs"})
+    experiment_id = int(response.headers["Location"].rsplit("/", 1)[-1])
+    client.post(f"/pcr/experiments/{experiment_id}/samples", data={"name": "Sample-001"})
+    client.post(f"/pcr/experiments/{experiment_id}/controls", data={"name": "NTC-001", "control_type": "No-template control"})
+
+    with app.app_context():
+        experiment = db.session.get(PCRExperiment, experiment_id)
+        sample_id = experiment.samples[0].id
+        control_id = experiment.controls[0].id
+
+    sample_response = client.post(f"/pcr/experiments/{experiment_id}/samples/{sample_id}/delete")
+    control_response = client.post(f"/pcr/experiments/{experiment_id}/controls/{control_id}/delete")
+
+    assert sample_response.status_code == 302
+    assert sample_response.headers["Location"].endswith("#sample-id-name")
+    assert control_response.status_code == 302
+    assert control_response.headers["Location"].endswith("#control-id-name")
+    with app.app_context():
+        experiment = db.session.get(PCRExperiment, experiment_id)
+        assert not experiment.samples
+        assert not experiment.controls
+
+
 def test_sample_and_control_results_can_be_updated(client, app):
     response = client.post("/pcr/experiments", data={"name": "Result run"})
     experiment_id = int(response.headers["Location"].rsplit("/", 1)[-1])

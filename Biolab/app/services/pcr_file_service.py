@@ -1,7 +1,7 @@
 import json
 from datetime import date, datetime
 
-from app.models import Control, PCRCycleGroup, PCRExperiment, PCRProgram, PCRStep, Plate, PlateWell, Reagent, Sample
+from app.models import Control, PCRCycleGroup, PCRExperiment, PCRProgram, PCRStep, Reagent, Sample
 
 
 def _date_value(value):
@@ -56,10 +56,6 @@ def experiment_to_dict(experiment):
                 for group in program.cycle_groups
             ],
         } if program else None,
-        "plate": [
-            {"position": well.position, "contents": well.contents, "target": well.target, "replicate_number": well.replicate_number, "sample_name": well.sample.name if well.sample else None, "control_name": well.control.name if well.control else None}
-            for plate in experiment.plates for well in plate.wells
-        ],
     }
 
 
@@ -100,12 +96,4 @@ def experiment_from_dict(payload):
         program.steps = [PCRStep(name=item.get("name", "Step"), step_type=item.get("step_type", "step"), order=int(item.get("order", index + 1)), temperature_c=float(item.get("temperature_c", 0)), duration_seconds=int(item.get("duration_seconds", 0)), cycles=int(item.get("cycles", 1)), goto_step=item.get("goto_step"), repeat_count=int(item.get("repeat_count", 0))) for index, item in enumerate(program_data.get("steps", []))]
         program.cycle_groups = [PCRCycleGroup(name=item.get("name", "Cycling group"), cycles=int(item.get("cycles", 1))) for item in program_data.get("cycle_groups", [])]
         experiment.programs.append(program)
-    if payload.get("plate"):
-        plate = Plate(name=f"{experiment.name} plate", rows=8, columns=12, experiment=experiment)
-        samples = {sample.name: sample for sample in experiment.samples}
-        controls = {control.name: control for control in experiment.controls}
-        for item in payload["plate"]:
-            well = PlateWell(position=item.get("position", "A1"), contents=item.get("contents"), target=item.get("target"), replicate_number=item.get("replicate_number"), sample=samples.get(item.get("sample_name")), control=controls.get(item.get("control_name")))
-            plate.wells.append(well)
-        experiment.plates.append(plate)
     return experiment

@@ -11,4 +11,3 @@ class Control(db.Model):
     experiment_id = db.Column(db.Integer, db.ForeignKey("pcr_experiment.id"), nullable=False)
 
     experiment = db.relationship("PCRExperiment", back_populates="controls")
-    wells = db.relationship("PlateWell", back_populates="control")
