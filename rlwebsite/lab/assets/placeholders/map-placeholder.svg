@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Map placeholder</title>
+  <desc id="desc">Placeholder map area for the laboratory location.</desc>
+  <rect width="1200" height="720" fill="#eef4f5"/>
+  <rect x="60" y="60" width="1080" height="600" rx="36" fill="#ffffff" stroke="#c9d5d9" stroke-width="6"/>
+  <path d="M180 540l140-260 180 120 150-210 160 130 160-120" fill="none" stroke="#c9d5d9" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M620 210c0-58 46-104 104-104s104 46 104 104c0 78-104 196-104 196S620 288 620 210z" fill="#13364a" opacity="0.9"/>
+  <circle cx="724" cy="210" r="42" fill="#ffffff"/>
+  <text x="600" y="610" text-anchor="middle" font-family="IBM Plex Sans, Arial, sans-serif" font-size="28" fill="#5a6d74">[OFFICIAL MAP OR LOCATION EMBED WILL BE ADDED]</text>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-labelledby="title desc">
+  <title id="title">Staff profile placeholder</title>
+  <desc id="desc">Placeholder portrait for staff member photographs.</desc>
+  <rect width="800" height="520" fill="#eef4f5"/>
+  <rect x="48" y="48" width="704" height="424" rx="32" fill="#ffffff" stroke="#c9d5d9" stroke-width="6"/>
+  <circle cx="400" cy="204" r="82" fill="#d8e6e8"/>
+  <path d="M288 388c42-72 108-108 198-108s156 36 198 108" fill="#d8e6e8"/>
+  <circle cx="400" cy="204" r="58" fill="#25656a" opacity="0.25"/>
+  <text x="400" y="448" text-anchor="middle" font-family="IBM Plex Sans, Arial, sans-serif" font-size="28" fill="#5a6d74">[OFFICIAL STAFF PHOTO WILL BE ADDED]</text>
+</svg>
